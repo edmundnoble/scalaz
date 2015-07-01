@@ -8,6 +8,7 @@ import org.scalacheck.Prop._
 import java.util.concurrent.{Executors, TimeoutException, TimeUnit}
 import java.util.concurrent.atomic._
 import org.scalacheck.Prop.forAll
+import scala.concurrent.duration._
 
 object TaskTest extends SpecLite {
 
@@ -290,5 +291,18 @@ object TaskTest extends SpecLite {
   "fromDisjunction matches attemptRun" ! forAll { x: Throwable \/ Int =>
     Task.fromDisjunction(x).attemptRun must_== x
   }
+
+  "fromScala works" ! forAll { x: Int =>
+    import scala.concurrent.ExecutionContext.Implicits.global
+    import scala.concurrent.{Future => SFuture}
+    Task.fromScala(SFuture { x }).run must_== x
+  }
+
+  "unsafeToScala works" ! forAll { x: Int =>
+    import scala.concurrent.ExecutionContext.Implicits.global
+    import scala.concurrent.{Await, Future => SFuture}
+    Await.result(Task.unsafeToScala(Task.delay(x)), 1.second) must_== x  
+  }
+
 }
 

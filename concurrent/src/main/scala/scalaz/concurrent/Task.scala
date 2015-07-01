@@ -6,11 +6,13 @@ import java.util.concurrent.atomic.{AtomicBoolean, AtomicInteger}
 import scalaz.{Catchable, Maybe, MonadError, Nondeterminism, Reducer, Trampoline, Traverse, \/, -\/, \/-}
 import scalaz.syntax.monad._
 import scalaz.std.list._
+import scalaz.std.`try`
 import scalaz.Free.Trampoline
 import scalaz.\/._
 
 import collection.JavaConversions._
 import scala.concurrent.duration._
+import scala.concurrent.{ExecutionContext, Promise => SPromise, Future => SFuture}
 
 /*
  * `Task[A]` is a `scalaz.concurrent.Future[Throwable \/ A]`,
@@ -390,5 +392,15 @@ object Task {
 
   def fromDisjunction[A <: Throwable, B](x: A \/ B): Task[B] =
     x.fold(Task.fail, Task.now)
+
+  def fromScala[A](future: SFuture[A])(implicit ec: ExecutionContext): Task[A] = {
+    async ( cb => future.onComplete(v => cb(`try`.toDisjunction(v))))
+  }
+
+  def unsafeToScala[A](task: Task[A])(implicit ec: ExecutionContext): SFuture[A] = {
+    val prom = SPromise[A]
+    task.runAsync(r => prom.complete(`try`.fromDisjunction(r)))
+    prom.future
+  }
 }
 
