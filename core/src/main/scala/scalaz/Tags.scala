@@ -91,4 +91,9 @@ object Tags {
 
   val Parallel = Tag.of[Parallel]
 
+  /** Type tag to choose a [[scalaz.Monoid]] instance that composes endomorphic Kleisli arrows. */
+  sealed trait EndoCompose
+
+  val EndoCompose = Tag.of[EndoCompose]
+
 }

@@ -199,6 +199,12 @@ abstract class KleisliInstances extends KleisliInstances0 {
       implicit def FB = FB0
     }
 
+  implicit def kleisliEndoMonoid[F[_], A](implicit F0: Monad[F]): Monoid[Kleisli[F, A, A] @@ Tags.EndoCompose] = 
+    new Monoid[Kleisli[F, A, A] @@ Tags.EndoCompose] {
+      def zero = Kleisli(F0.pure[A])
+      def append(f1: Kleisli[F, A, A], f2: Kleisli[F, A, A]) = f1 <=< f2
+    }
+
   implicit def kleisliPlusEmpty[F[_], A](implicit F0: PlusEmpty[F]): PlusEmpty[Kleisli[F, A, ?]] =
     new KleisliPlusEmpty[F, A] {
       implicit def F = F0
