@@ -298,12 +298,12 @@ object TaskTest extends SpecLite {
     Task.fromScala(SFuture { x }).run must_== x
   }
 
-  "delayFromScala defers effects" in {
+  "fromScala defers effects" in {
     import scala.concurrent.ExecutionContext.Implicits.global
     import scala.concurrent.{Future => SFuture}
     var x = 0
     def mkFuture = SFuture { x = 1 }
-    val task = Task.delayFromScala(mkFuture)
+    val task = Task.fromScala(mkFuture)
     x must_== 0
     task.run
     x must_== 1
@@ -321,6 +321,24 @@ object TaskTest extends SpecLite {
     val unused = Task.unsafeToScala(task)
     x must_== 1
   }
+
+  "wrapToScala works" ! forAll { x: Int =>
+    import scala.concurrent.Await
+    val task = Task.delay(x)
+    val futureTask = Task.wrapToScala(task)
+    Await.result(futureTask.run, 1.second) must_== x  
+  }
+
+  "wrapToScala defers effects" in {
+    import scala.concurrent.ExecutionContext.Implicits.global
+    import scala.concurrent.{Future => SFuture}
+    var x = 0
+    val task = Task.delay { x = 1 }
+    val futureTask = Task.wrapToScala(task)
+    x must_== 0
+    task.run
+    x must_== 1
+  } 
 
 }
 

@@ -393,12 +393,8 @@ object Task {
   def fromDisjunction[A <: Throwable, B](x: A \/ B): Task[B] =
     x.fold(Task.fail, Task.now)
 
-  def fromScala[A](future: SFuture[A])(implicit ec: ExecutionContext): Task[A] = {
+  def fromScala[A](future: => SFuture[A])(implicit ec: ExecutionContext): Task[A] = {
     async ( cb => future.onComplete(v => cb(`try`.toDisjunction(v))))
-  }
-
-  def delayFromScala[A](block: => SFuture[A])(implicit ec: ExecutionContext): Task[A] = {
-    suspend { fromScala(block) }
   }
 
   def unsafeToScala[A](task: Task[A]): SFuture[A] = {
