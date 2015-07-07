@@ -397,10 +397,16 @@ object Task {
     async ( cb => future.onComplete(v => cb(`try`.toDisjunction(v))))
   }
 
-  def unsafeToScala[A](task: Task[A])(implicit ec: ExecutionContext): SFuture[A] = {
+  def delayFromScala[A](block: => SFuture[A])(implicit ec: ExecutionContext): Task[A] = {
+    suspend { fromScala(block) }
+  }
+
+  def unsafeToScala[A](task: Task[A]): SFuture[A] = {
     val prom = SPromise[A]
     task.runAsync(r => prom.complete(`try`.fromDisjunction(r)))
     prom.future
   }
+
+  def wrapToScala[A](task: Task[A]): Task[SFuture[A]] = delay(unsafeToScala(task))
 }
 
