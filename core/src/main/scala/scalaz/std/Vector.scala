@@ -30,8 +30,9 @@ trait VectorInstances extends VectorInstances0 {
     def unzip[A, B](a: Vector[(A, B)]) = a.unzip
 
     def traverseImpl[F[_], A, B](v: Vector[A])(f: A => F[B])(implicit F: Applicative[F]) = {
-      DList.fromIList(IList.fromFoldable(v)).foldr(F.point(empty[B])) {
-         (a, fbs) => F.apply2(f(a), fbs)(_ +: _)
+
+      foldLeft(v, F.point(empty[B])) { (b, a) =>
+        F.apply2(f(a), b)(_ +: _)
       }
     }
 

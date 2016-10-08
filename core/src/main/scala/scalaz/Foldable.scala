@@ -107,6 +107,10 @@ trait Foldable[F[_]]  { self =>
 
   /**Curried version of `foldLeft` */
   final def foldl[A, B](fa: F[A], z: B)(f: B => A => B) = foldLeft(fa, z)((b, a) => f(b)(a))
+  /** Map each element of the structure to a [[scalaz.Monoid]], and combine the results associated to the left.
+    * May not terminate on infinite structures, but uses constant stack space if foldLeft does. */
+  def foldMapLeft[A,B](fa: F[A])(f: A => B)(implicit F: Monoid[B]): B =
+    foldLeft(fa, F.zero)((a, b) ⇒ F.append(a, f(b)))
   def foldMapLeft1Opt[A, B](fa: F[A])(z: A => B)(f: (B, A) => B): Option[B] =
     foldLeft(fa, None: Option[B])((optB, a) =>
       optB map (f(_, a)) orElse Some(z(a)))

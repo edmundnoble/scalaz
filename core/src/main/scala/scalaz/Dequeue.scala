@@ -240,7 +240,6 @@ sealed abstract class DequeueInstances {
   implicit val dequeueInstances: Foldable[Dequeue] with IsEmpty[Dequeue] with Functor[Dequeue] = new Foldable[Dequeue] with IsEmpty[Dequeue] with Functor[Dequeue] {
     override def foldRight[A,B](fa: Dequeue[A], b: => B)(f: (A, => B) =>B): B = fa.foldRight(b)((a,b) => f(a,b))
     override def foldLeft[A,B](fa: Dequeue[A], b: B)(f: (B,A)=>B): B = fa.foldLeft(b)(f)
-    override def foldMap[A,B](fa: Dequeue[A])(f: A => B)(implicit F: Monoid[B]): B = fa.foldLeft(F.zero)((b,a) => F.append(b, f(a)))
     override def empty[A]: Dequeue[A] = Dequeue.empty
     override def plus[A](a: Dequeue[A], b: => Dequeue[A]): Dequeue[A] = a ++ b
     override def isEmpty[A](fa: Dequeue[A]) = fa.isEmpty

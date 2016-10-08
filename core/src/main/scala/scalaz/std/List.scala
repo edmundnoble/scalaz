@@ -62,9 +62,9 @@ trait ListInstances extends ListInstances0 {
         // foldRight(l, F.point(List[B]())) {
         //   (a, fbs) => F.apply2(f(a), fbs)(_ :: _)
         // }
-  
-        DList.fromList(l).foldr(F.point(List[B]())) {
-           (a, fbs) => F.apply2(f(a), fbs)(_ :: _)
+
+        foldLeft(l, F.point(Nil: List[B])) { (b, a) =>
+          F.apply2(f(a), b)(_ :: _)
         }
       }
 

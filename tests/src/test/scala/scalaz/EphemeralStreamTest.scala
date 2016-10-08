@@ -99,6 +99,10 @@ object EphemeralStreamTest extends SpecLite {
     Foldable[EphemeralStream].foldMap(infiniteStream)(identity)(booleanInstance.conjunction) must_===(false)
   }
 
+  "foldMapLeft does not stack overflow on large streams" in {
+    Foldable[EphemeralStream].foldMapLeft(EphemeralStream.unfold(1)(i ⇒ Some((i), i)).take(1000000))(_ => 2)(intInstance) must_===(2000000)
+  }
+
   "foldRight evaluates lazily" in {
     val infiniteStream = EphemeralStream.iterate(true)(identity)
     Foldable[EphemeralStream].foldRight(infiniteStream, true)(_ || _) must_===(true)

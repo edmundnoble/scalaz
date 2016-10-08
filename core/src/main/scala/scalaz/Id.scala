@@ -43,6 +43,10 @@ trait IdInstances {
 
       override def foldMapRight1[A, B](fa: Id[A])(z: A => B)(f: (A, => B) => B): B = z(fa)
 
+      override def foldMapLeft1[A, B](fa: Id[A])(z: A => B)(f: (B, A) => B): B = z(fa)
+
+      override def foldMapLeft[A,B](fa: Id[A])(f: A => B)(implicit B: Monoid[B]): B = f(fa)
+
       // Overrides for efficiency.
 
       override def lift[A, B](f: A => B): Id[A] => Id[B] = f

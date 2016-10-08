@@ -77,6 +77,10 @@ object StreamTest extends SpecLite {
     Foldable[Stream].foldMap(Stream.continually(false))(identity)(booleanInstance.conjunction) must_===(false)
   }
 
+  "foldMapLeft does not stack overflow on large streams" in {
+    Foldable[Stream].foldMapLeft(Stream.from(1).take(1000000))(_ => 2)(intInstance) must_===(2000000)
+  }
+
   "foldRight evaluates lazily" in {
     Foldable[Stream].foldRight(Stream.continually(true), true)(_ || _) must_===(true)
   }

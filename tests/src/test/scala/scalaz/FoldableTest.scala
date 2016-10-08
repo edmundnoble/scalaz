@@ -95,6 +95,12 @@ object FoldableTest extends SpecLite {
     import syntax.foldable1._
     import syntax.std.list._
 
+    "foldMapLeft" ! forAll {
+      (xs: List[String]) ⇒
+        xs foldMapLeft strlen must_== xs.map(_.length).sum
+        xs foldMapLeft strlen must_== xs foldMap strlen
+    }
+
     "foldLeft1Opt" ! forAll {
       (xs: List[Int]) =>
         xs match {

@@ -2,6 +2,8 @@ package scalaz
 
 import std.anyVal._
 import std.vector._
+import std.list._
+import std.stream._
 import std.string._
 
 /**
@@ -107,9 +109,9 @@ final case class Cord(self: FingerTree[Int, String]) {
    */
   def map(f: Char => Char): Cord = cord(self map (_ map f))
 
-  def toList: List[Char] = toVector.toList
-  def toStream: Stream[Char] = toVector.toStream
-  def toVector: Vector[Char] = self.foldMap(_.toVector)
+  def toList: List[Char] = self.foldMapLeft(_.toList)
+  def toStream: Stream[Char] = self.foldMapLeft(_.toStream)
+  def toVector: Vector[Char] = self.foldMapLeft(_.toVector)
   override def toString: String = {
     import syntax.foldable._
     import Free._

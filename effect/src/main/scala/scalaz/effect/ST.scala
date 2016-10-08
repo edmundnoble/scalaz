@@ -176,7 +176,7 @@ object ST extends STInstances {
       def apply[S] = for {
         a <- newArr(size, z)
         _ <- {
-          F.foldMap(ivs)((x: (Int, B)) => a.update(f, x._1, x._2))(stMonoid[S, Unit])
+          F.foldMapLeft(ivs)((x: (Int, B)) => a.update(f, x._1, x._2))(stMonoid[S, Unit])
         }
         frozen <- a.freeze
       } yield frozen

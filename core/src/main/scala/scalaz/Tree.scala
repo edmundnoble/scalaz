@@ -20,6 +20,10 @@ sealed abstract class Tree[A] {
   def foldMap[B: Monoid](f: A => B): B =
     Monoid[B].append(f(rootLabel), Foldable[Stream].foldMap[Tree[A], B](subForest)((_: Tree[A]).foldMap(f)))
 
+  /** Maps the elements of the Tree into a Monoid and folds the resulting Tree, associating to the left. */
+  def foldMapLeft[B: Monoid](f: A => B): B =
+    Monoid[B].append(f(rootLabel), Foldable[Stream].foldMapLeft[Tree[A], B](subForest)((_: Tree[A]).foldMapLeft(f)))
+
   def foldRight[B](z: => B)(f: (A, => B) => B): B =
     Foldable[Stream].foldRight(flatten, z)(f)
 

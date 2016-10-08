@@ -37,6 +37,14 @@ object FoldableUsage extends App {
   // properly lazy, allowing us to collapse our infinite stream again
   assert(Tag.unwrap(Foldable[Stream].foldMap(trues)((b: Boolean) => Tags.Disjunction(b))))
 
+  // if we know for sure that a monoid doesn't benefit from laziness,
+  // foldMapLeft can be used instead of foldMap and it will
+  // take constant stack space and return the same answer
+  // for example, after uncommenting, this will not terminate:
+  // assert(Tag.unwrap(Foldable[Stream].foldMap(trues)((b: Boolean) => Tags.Disjunction(b))))
+  // however, this will:
+  assert(Foldable[Stream].foldMapLeft(Stream.from(1).take(1000000))(_ => 1) === 1000000)
+
   // We can import syntax for foldable, allowing us to "enhance" the foldable with the new methods:
   import scalaz.syntax.foldable._
   assert(trues.foldr(false)(lazyOr))
