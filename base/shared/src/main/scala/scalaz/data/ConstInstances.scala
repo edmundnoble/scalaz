@@ -45,10 +45,9 @@ trait ConstInstances {
       Const(AS.append(a1.getConst, a2.getConst))
   }
 
-  trait ConstMonoid[A, B] extends Monoid[Const[A, B]] with ConstSemigroup[A, B] {
+  trait ConstMonoid[A, B] extends Monoid.Template[Const[A, B]] with ConstSemigroup[A, B] {
     protected val AM: Monoid[A]
     protected val AS = AM.semigroup
-    def semigroup: Semigroup[Const[A, B]] with this.type = this
     def empty: Const[A, B] = Const(AM.empty)
   }
 

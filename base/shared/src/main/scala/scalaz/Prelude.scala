@@ -16,9 +16,11 @@ trait BaseTypeclasses {
   type IsCovariant[F[_]] = typeclass.IsCovariant[F]
   type Monad[M[_]] = typeclass.Monad[M]
   type Monoid[T] = typeclass.Monoid[T]
+  val Monoid = typeclass.Monoid
   type Phantom[F[_]] = typeclass.Phantom[F]
   type Profunctor[F[_,_]] = typeclass.Profunctor[F]
   type Semigroup[T] = typeclass.Semigroup[T]
+  val Semigroup = typeclass.Semigroup
   type Show[A] = typeclass.Show[A]
   type Strong[F[_,_]] = typeclass.Strong[F]
   type Traversable[T[_]] = typeclass.Traversable[T]
@@ -37,10 +39,8 @@ trait BaseTypeclasses {
   def IsContravariant[F[_]](implicit F: IsContravariant[F]): IsContravariant[F] = F
   def IsCovariant[F[_]](implicit F: IsCovariant[F]): IsCovariant[F] = F
   def Monad[M[_]](implicit M: Monad[M]): Monad[M] = M
-  def Monoid[T](implicit T: Monoid[T]): Monoid[T] = T
   def Phantom[F[_]](implicit F: Phantom[F]): Phantom[F] = F
   def Profunctor[P[_,_]](implicit P: Profunctor[P]): Profunctor[P] = P
-  def Semigroup[T](implicit T: Semigroup[T]): Semigroup[T] = T
   def Show[A](implicit A: Show[A]): Show[A] = A
   def Strong[P[_,_]](implicit P: Strong[P]): Strong[P] = P
   def Traversable[T[_]](implicit T: Traversable[T]): Traversable[T] = T
