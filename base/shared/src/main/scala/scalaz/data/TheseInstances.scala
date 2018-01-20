@@ -1,7 +1,7 @@
 package scalaz
 package data
 
-import typeclass.{ BindClass, FoldableClass, MonadClass, SemigroupClass, TraversableClass }
+import typeclass.{ BindClass, FoldableClass, MonadClass, TraversableClass }
 
 trait TheseInstances {
   // implicit def bifunctor: Bifunctor[These] = ...
@@ -27,7 +27,7 @@ trait TheseInstances {
     }
 
   implicit final def theseSemigroup[L: Semigroup, R: Semigroup]: Semigroup[These[L, R]] =
-    new SemigroupClass[These[L, R]] {
+    new Semigroup[These[L, R]] {
       def append(a1: These[L, R], a2: => These[L, R]) = a1.append(a2)
     }
 
