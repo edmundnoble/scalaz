@@ -2,6 +2,8 @@
 package scalaz
 package effect
 
+import Predef._
+
 /**
  * A description of the result of executing an `IO` value. The result is either
  * completed with a value, failed because of an uncaught `E`, or terminated

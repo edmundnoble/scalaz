@@ -4,6 +4,8 @@ package effect
 
 import scala.Any
 
+import data.\/
+
 object Errors {
   final case class LostRace(loser: Fiber[_, _] \/ Fiber[_, _])
       extends Exception("Lost a race to " + loser.fold(_ => "right", _ => "left"))

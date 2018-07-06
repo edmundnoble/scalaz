@@ -5,6 +5,8 @@ package effect
 import scala.{ sys, Array, List }
 import scala.concurrent.duration.Duration
 
+import Predef._
+
 /**
  * The entry point for a purely-functional application on the JVM.
  *

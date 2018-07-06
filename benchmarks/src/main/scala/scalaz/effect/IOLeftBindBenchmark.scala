@@ -9,6 +9,8 @@ import scala.concurrent.Await
 
 import org.openjdk.jmh.annotations._
 
+import Predef._
+
 import IOBenchmarks._
 
 @State(Scope.Thread)

@@ -2,8 +2,8 @@
 package scalaz
 package effect
 
-import scalaz.ct._
-import scalaz.types.IsCovariantClass
+import prop._
+import tc._
 
 trait IOInstances {
   implicit def monad[E]: Monad[IO[E, ?]] =
@@ -26,6 +26,6 @@ trait IOInstances {
       override def rmap[A, B, T](fab: IO[A, B])(bt: B => T): IO[A, T] = fab.map(bt)
     })
 
-  implicit def isCovariant[E]: IsCovariant[IO[E, ?]] = IsCovariantClass.unsafeForce[IO[E, ?]]
+  implicit def isCovariant[E]: IsCovariant[IO[E, ?]] = IsCovariant.unsafeForce[IO[E, ?]]
 
 }

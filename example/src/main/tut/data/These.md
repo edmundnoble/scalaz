@@ -10,25 +10,23 @@ title:  "These"
 `A \/ B \/ (A, B)`, but is significantly easier to use and has different
 typeclass instances.
 
-```tut:silent
-import scalaz._
-import Scalaz._
-```
-
 # Basics
 
 A value of type `A \&/ B` can be constructed in one of three ways:
+From a single `A`, from a single `B`, or from both an `A` and a `B`.
 
 ```tut
-type IntAndOrString = Int \&/ String
-val anInt: IntAndOrString = This(123)
-val aString: IntAndOrString = That("a")
-val both: IntAndOrString = Both(456, "bcd")
+import scalaz.data._, scalaz.Scalaz._
+val anInt: List[Int] \&/ String = This(List(123))
+val aString: List[Int] \&/ String = That("a")
+val both: List[Int] \&/ String = Both(List(456), "bcd")
 ```
 
-and destructured by pattern matching:
+Being destructured by pattern matching:
 
 ```tut
+import scala.Predef.???
+
 (anInt, aString, both) match {
   case (This(int1), That(str1), Both(int2, str2)) => (int1, str1, int2, str2)
   case _ => ???
@@ -38,7 +36,8 @@ and destructured by pattern matching:
 There is also a `fold` method which is equivalent to pattern matching:
 
 ```tut
-def myFold(t: IntAndOrString) = t.fold(_ => "This")(_ => "That")((_, _) => "Both")
+def myFold(t: List[Int] \&/ String): String =
+  t.fold(_ => "This")(_ => "That")((_, _) => "Both")
 (myFold(anInt), myFold(aString), myFold(both))
 ```
 
@@ -46,10 +45,10 @@ def myFold(t: IntAndOrString) = t.fold(_ => "This")(_ => "That")((_, _) => "Both
 
 ## Bifunctor
 
-`These` is a [functor](../ct/Functor.html) in both of its type parameters:
+`These` is a [functor](../tc/Functor.html) in both of its type parameters:
 
 ```tut
-(anInt.lmap(_ + 1), aString.lmap(_ + 1), both.lmap(_ + 1))
+(anInt.lmap(1 :: _), aString.lmap(1 :: _), both.lmap(1 :: _))
 
 (anInt.rmap(_ + "-ish"), aString.rmap(_ + "-ish"), both.rmap(_ + "-ish"))
 ```
@@ -62,14 +61,14 @@ both.map(_ + " and others")
 
 ## Monad
 
-`These` is a [monad](../ct/Monad.html) if `A` is a [Semigroup](../algebra/Semigroup.html). `pure` is `That`, and `flatMap`
+`These` is a [monad](../tc/Monad.html) if `A` is a [Semigroup](../tc/Semigroup.html). `pure` is `That`, and `flatMap`
 collects `A` values in `This` or `Both` cases using the semigroupal `append`.
 
 ```tut
-import scalaz.algebra.SemigroupClass
+import scalaz.tc._
 
 implicit val intSemigroup: Semigroup[Int] = instanceOf[SemigroupClass[Int]](_ + _)
-both.flatMap((s: String) => Both(789, s + s))
+both.flatMap((s: String) => Both(List(789), s + s))
 aString.flatMap(_ => anInt)
 ```
 
@@ -86,9 +85,9 @@ both append both
 Values can also be appended on either side:
 
 ```tut
-anInt lappend 2
+anInt lappend List(2)
 aString rappend ", fool"
-both lappend 1000
+both lappend List(1000)
 ```
 
 

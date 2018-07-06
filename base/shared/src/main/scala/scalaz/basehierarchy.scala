@@ -1,5 +1,7 @@
 package scalaz
 
+import tc._
+
 trait BaseHierarchy extends BaseHierarchy.BH0
 
 object BaseHierarchy {

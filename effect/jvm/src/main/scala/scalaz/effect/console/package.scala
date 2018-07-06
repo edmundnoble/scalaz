@@ -6,6 +6,8 @@ import java.io.IOException
 
 import scala.PartialFunction
 
+import Predef._
+
 package object console {
   private val ioException: PartialFunction[Throwable, IOException] = {
     case e: IOException => e

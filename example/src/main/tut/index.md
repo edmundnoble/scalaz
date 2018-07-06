@@ -14,19 +14,17 @@ It provides purely functional data structures to complement those from the Scala
 Include Scalaz in your project by adding the following to your `build.sbt`:
 
 ```tut:evaluated
-println(s"""libraryDependencies += "org.scalaz" %% "scalaz-base" % "${scalaz.BuildInfo.version}"""")
+scala.Console.println(s"""libraryDependencies += "org.scalaz" %% "scalaz-base" % "${scalaz.BuildInfo.version}"""")
 ```
 
 # Modules
 
-Scalaz provides additional modules for functionality beyond the basics included in `scalaz-base`
+Scalaz provides an additional module for functionality beyond the basics included in `scalaz-base`
 
 - `scalaz-effect`:  General-purpose effect monad
-- `scalaz-std`: Typeclass instances for the Scala standard library
 
 ```tut:evaluated
-println(s"""libraryDependencies += "org.scalaz" %% "scalaz-effect" % "${scalaz.BuildInfo.version}"""")
-println(s"""libraryDependencies += "org.scalaz" %% "scalaz-std" % "${scalaz.BuildInfo.version}"""")
+scala.Console.println(s"""libraryDependencies += "org.scalaz" %% "scalaz-effect" % "${scalaz.BuildInfo.version}"""")
 ```
 
 # Community

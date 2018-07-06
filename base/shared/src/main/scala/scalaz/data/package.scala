@@ -2,6 +2,8 @@ package scalaz
 
 import scala.{ Any, AnyVal, Option, Some }
 
+import tc._
+
 package object data {
   val Forall: ForallModule = ForallImpl
   val ∀ : Forall.type      = Forall
@@ -17,6 +19,14 @@ package object data {
 
   type ~>[F[_], G[_]]        = ∀[λ[α => F[α] => G[α]]]
   type ~~>[F[_, _], G[_, _]] = ∀∀[λ[(α, β) => F[α, β] => G[α, β]]]
+
+  type \/[L, R] = data.Disjunction[L, R]
+  val (\/): data.Disjunction.type = data.Disjunction
+
+  type \&/[A, B] = data.These[A, B]
+
+  val Void: VoidModule = VoidImpl
+  type Void = Void.Void
 
   /**
    * Type-aligned pair. Isomorphic to
@@ -84,11 +94,17 @@ package object data {
   val Cord: CordModule = CordImpl
   type Cord = Cord.Cord
 
+  val Endo: EndoModule = EndoImpl
+  type Endo[=>:[_, _], A] = Endo.Endo[=>:, A]
+
   val Fix: FixModule = FixImpl
   type Fix[F[_]] = Fix.Fix[F]
 
   val Identity: IdentityModule = IdentityImpl
   type Identity[A] = Identity.Identity[A]
+
+  val Kleisli: KleisliModule = KleisliImpl
+  type Kleisli[F[_], A, B] = Kleisli.Kleisli[F, A, B]
 
   val IList: IListModule = IListImpl
   type IList[A] = IList.IList[A]
@@ -98,4 +114,5 @@ package object data {
 
   val Maybe2: Maybe2Module = Maybe2Impl
   type Maybe2[A, B] = Maybe2.Maybe2[A, B]
+
 }

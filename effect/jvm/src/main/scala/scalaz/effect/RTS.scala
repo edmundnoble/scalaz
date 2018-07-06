@@ -10,6 +10,9 @@ import java.util.concurrent.atomic.AtomicReference
 import java.util.concurrent.{ Executors, TimeUnit }
 import java.lang.{ Math, Runnable, Runtime }
 
+import Predef._
+import data.{\/-, -\/, Maybe}
+
 /**
  * This trait provides a high-performance implementation of a runtime system for
  * the `IO` monad on the JVM.

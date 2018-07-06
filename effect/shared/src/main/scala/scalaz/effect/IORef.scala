@@ -6,6 +6,8 @@ import java.util.concurrent.atomic.AtomicReference
 
 import scala.AnyVal
 
+import Predef._
+
 /**
  * A mutable atomic reference for the `IO` monad. This is the `IO` equivalent of
  * a volatile `var`, augmented with atomic operations, which make it useful as a

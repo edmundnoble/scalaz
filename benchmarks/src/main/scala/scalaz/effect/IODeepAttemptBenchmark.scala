@@ -10,6 +10,8 @@ import scala.math.BigInt
 
 import org.openjdk.jmh.annotations._
 
+import Predef._
+
 import IOBenchmarks._
 
 @State(Scope.Thread)

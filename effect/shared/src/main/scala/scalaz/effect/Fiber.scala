@@ -2,6 +2,9 @@
 package scalaz
 package effect
 
+import Predef._
+import tc._
+
 /**
  * A fiber is a lightweight thread of execution that never consumes more than a
  * whole thread (but may consume much less, depending on contention). Fibers are

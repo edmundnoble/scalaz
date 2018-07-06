@@ -3,9 +3,9 @@ package data
 
 import scala.AnyVal
 
-import Prelude._
+import Predef._
 import AList.aListOps
-import scalaz.ct.ComposeClass
+import tc._
 
 /**
  * Binary counter-like accumulator for type-aligned binary type constructors,

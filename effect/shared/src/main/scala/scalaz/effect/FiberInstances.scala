@@ -2,8 +2,8 @@
 package scalaz
 package effect
 
-import scalaz.algebra.MonoidClass
-import scalaz.ct.ApplicativeClass
+import Predef._
+import tc._
 
 trait FiberInstances {
   implicit def fiberMonoid[E, A](implicit A: Monoid[A]): Monoid[Fiber[E, A]] =

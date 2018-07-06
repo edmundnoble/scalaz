@@ -8,6 +8,8 @@ import scala.Array
 import scala.concurrent.Await
 import scala.math.BigInt
 
+import Predef._
+
 import org.openjdk.jmh.annotations._
 
 import IOBenchmarks._

@@ -3,8 +3,9 @@ package data
 
 import scala.{ AnyVal, Nothing }
 
-import debug.DebugClass
-import types.Is
+import Predef._
+import prop._
+import tc._
 
 /**
  * Isomorphic to `AMaybe[λ[(α, β) => APair[F[α, ?], G[?, β]]], A, B]`,

@@ -3,6 +3,8 @@ package effect
 
 import scala.List
 
+import Predef._
+
 trait SafeApp {
 
   /**

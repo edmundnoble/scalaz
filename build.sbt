@@ -26,7 +26,7 @@ lazy val root = project
   .settings(
     skip in publish := true
   )
-  .aggregate(baseJVM, baseJS, metaJVM, metaJS, effectJVM, effectJS, stdJVM, stdJS, example, benchmarks)
+  .aggregate(baseJVM, baseJS, metaJVM, metaJS, effectJVM, effectJS, example, benchmarks)
   .enablePlugins(ScalaJSPlugin)
 
 lazy val base = crossProject.module
@@ -77,15 +77,8 @@ lazy val metaJVM = meta.jvm
 
 lazy val metaJS = meta.js
 
-lazy val std = crossProject.module
-  .in(file("std"))
-  .dependsOn(base)
-
-lazy val stdJVM = std.jvm
-lazy val stdJS  = std.js
-
 lazy val example = project.module
-  .dependsOn(baseJVM, stdJVM)
+  .dependsOn(baseJVM)
   .enablePlugins(MicrositesPlugin, BuildInfoPlugin)
   .settings(
     buildInfoKeys := Seq[BuildInfoKey](name, version, scalaVersion, sbtVersion),

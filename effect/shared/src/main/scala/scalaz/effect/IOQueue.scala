@@ -3,9 +3,8 @@
 package scalaz.effect
 
 import scalaz.effect.IOQueue.internal._
-import scalaz.{ Boolean, Int, Unit, Void }
 
-import scala.{ None, Some }
+import scala.{  Boolean, Int, Unit, None, Some }
 import scala.collection.immutable.Queue
 
 /**

@@ -1,13 +1,14 @@
-package scalaz.effect
+package scalaz
+package effect
+
+import scala.{ Int, List, StringContext, Unit }
+import scala.Predef.String
+import scala.collection.immutable.Range
+import scala.concurrent.duration._
 
 import org.specs2.Specification
 import org.specs2.concurrent.ExecutionEnv
 import org.specs2.specification.AroundTimeout
-import scalaz.{ Int, String, Unit, Void }
-
-import scala.{ List, StringContext }
-import scala.collection.immutable.Range
-import scala.concurrent.duration._
 
 class IOQueueSpec(implicit ee: ExecutionEnv) extends Specification with AroundTimeout with RTS {
 

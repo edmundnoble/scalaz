@@ -8,6 +8,7 @@ import scala.Predef.ArrowAssoc
 
 import org.specs2.Specification
 
+import Predef._
 import Scalaz._
 
 class IORefSpec extends Specification with RTS {

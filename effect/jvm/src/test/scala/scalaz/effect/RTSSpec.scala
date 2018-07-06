@@ -12,7 +12,9 @@ import org.specs2.concurrent.ExecutionEnv
 import org.specs2.Specification
 import org.specs2.specification.AroundTimeout
 
-import scalaz.effect.Errors.UnhandledError
+import Predef._
+import data.{\/, -\/}
+import Errors.UnhandledError
 
 class RTSSpec(implicit ee: ExecutionEnv) extends Specification with AroundTimeout with RTS {
 

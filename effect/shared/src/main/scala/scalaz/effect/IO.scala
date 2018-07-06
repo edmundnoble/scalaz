@@ -8,9 +8,11 @@ import scala.{ ::, Any, List, Nil, Nothing, PartialFunction }
 import scala.annotation.switch
 import scala.concurrent.duration._
 
-import scalaz.data.Disjunction
+import Predef._
+import data.{-\/, \/-, \/, Maybe, Disjunction}
+import prop.<~<
 
-import scalaz.effect.Errors._
+import Errors._
 
 /**
  * An `IO[E, A]` ("Eye-Oh of Eeh Aye") is an immutable data structure that

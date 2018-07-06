@@ -1,9 +1,8 @@
 package scalaz
 package data
 
-import core.EqClass
-import ct.MonadClass
-import debug.DebugClass
+import Predef._
+import tc._
 
 sealed abstract class IdentityModule {
   type Identity[A]
@@ -30,7 +29,7 @@ private[data] object IdentityImpl extends IdentityModule {
   def apply[A](a: A): Identity[A] = a
   def run[A](id: Identity[A]): A  = id
 
-  def identityMonad: Monad[Identity] =
+  val identityMonad: Monad[Identity] =
     instanceOf(new MonadClass[Identity] {
       override def map[A, B](fa: Identity[A])(f: A => B): Identity[B]               = f(fa)
       override def ap[A, B](fa: Identity[A])(f: Identity[A => B]): Identity[B]      = f(fa)

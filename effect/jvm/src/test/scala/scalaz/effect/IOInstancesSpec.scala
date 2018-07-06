@@ -3,6 +3,9 @@ package effect
 
 import scala.Predef.augmentString
 
+import Predef._
+import tc.Bifunctor
+
 import org.specs2.Specification
 
 class IOInstancesSpec extends Specification with RTS {

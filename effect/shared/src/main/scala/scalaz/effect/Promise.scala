@@ -6,6 +6,8 @@ import java.util.concurrent.atomic.AtomicReference
 
 import scala.{ AnyVal, List, Nil }
 
+import Predef._
+
 import Promise.internal._
 
 /**

@@ -2,6 +2,10 @@ package scalaz
 
 import scala.List
 
+import Predef._
+import data._
+import prop._
+import tc._
 import Scalaz._
 
 /* Tests that the various syntax macros work for the typeclasses which use them. */

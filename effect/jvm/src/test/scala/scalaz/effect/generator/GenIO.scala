@@ -3,7 +3,7 @@ package effect
 package generator
 
 import org.scalacheck._
-import scalaz.effect.{ ExitResult, IO, RTS }
+import Predef._
 
 trait GenIO {
 

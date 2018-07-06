@@ -1,6 +1,10 @@
 package scalaz
 package effect
 
+import Predef._
+import data.-\/
+import tc.Bifunctor
+
 import org.specs2.Specification
 
 class PromiseSpec extends Specification with RTS {

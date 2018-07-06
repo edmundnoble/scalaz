@@ -4,6 +4,8 @@ package scalaz
 
 import scala.AnyRef
 
+import Predef._
+
 package object effect {
   type Error            = java.lang.Error
   type Exception        = java.lang.Exception
@@ -11,6 +13,9 @@ package object effect {
   type OutOfMemoryError = java.lang.OutOfMemoryError
   type RuntimeException = java.lang.RuntimeException
   type Throwable        = java.lang.Throwable
+  type Void             = data.Void
+
+  val Void: data.Void.type = data.Void
 
   implicit class IOVoidSyntax[A](val io: IO[Void, A]) extends AnyRef {
     def apply[E]: IO[E, A] = io.asInstanceOf[IO[E, A]]

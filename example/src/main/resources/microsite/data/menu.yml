@@ -8,49 +8,49 @@ options:
 
     nested_options:
     - title: Applicative
-      url: ct/Applicative.html
+      url: tc/Applicative.html
       menu_section: typeclass
     - title: Apply
-      url: ct/Apply.html
+      url: tc/Apply.html
       menu_section: typeclass
     - title: Bifunctor
-      url: ct/Bifunctor.html
+      url: tc/Bifunctor.html
       menu_section: typeclass
     - title: Bind
-      url: ct/Bind.html
+      url: tc/Bind.html
       menu_section: typeclass
     - title: Category
-      url: ct/Category.html
+      url: tc/Category.html
       menu_section: typeclass
     - title: Compose
-      url: ct/Compose.html
+      url: tc/Compose.html
       menu_section: typeclass
     - title: Debug
-      url: debug/Debug.html
+      url: tc/Debug.html
       menu_section: typeclass
     - title: Eq
-      url: core/Eq.html
+      url: tc/Eq.html
       menu_section: typeclass
     - title: Functor
-      url: ct/Functor.html
+      url: tc/Functor.html
       menu_section: typeclass
     - title: Kleisli
-      url: ct/Kleisli.html
+      url: tc/Kleisli.html
       menu_section: typeclass
     - title: Monad
-      url: ct/Monad.html
+      url: tc/Monad.html
       menu_section: typeclass
     - title: Monoid
-      url: algebra/Monoid.html
+      url: tc/Monoid.html
       menu_section: typeclass
     - title: Ord
-      url: algebra/Ord.html
+      url: tc/Ord.html
       menu_section: typeclass
     - title: Semigroup
-      url: algebra/Semigroup.html
+      url: tc/Semigroup.html
       menu_section: typeclass
     - title: Strong
-      url: ct/Strong.html
+      url: tc/Strong.html
       menu_section: typeclass
 
   - title: Data classes
