@@ -8,9 +8,9 @@ import Predef._
 import data.∀
 
 /**
- * The data type `Is` is the encoding of Leibnitz’ law which states that
+ * The data type `Is` is the encoding of Leibniz’ law which states that
  * if `a` and `b` are identical then they must have identical properties.
- * Leibnitz’ original definition reads as follows:
+ * Leibniz’ original definition reads as follows:
  *   a ≡ b = ∀ f .f a ⇔ f b
  * and can be proven to be equivalent to:
  *   a ≡ b = ∀ f .f a → f b
@@ -68,7 +68,7 @@ sealed trait Is[A, B] { ab =>
     subst[λ[α => α]](a)
 
   /**
-   * Equality is transitive relation and its witnesses can be composed
+   * Equality is a transitive relation and its witnesses can be composed
    * in a chain much like functions.
    *
    * @see [[compose]]
@@ -77,7 +77,7 @@ sealed trait Is[A, B] { ab =>
     bc.subst[A === ?](ab)
 
   /**
-   * Equality is transitive relation and its witnesses can be composed
+   * Equality is a transitive relation and its witnesses can be composed
    * in a chain much like functions.
    *
    * @see [[andThen]]
